@@ -9,7 +9,7 @@
 (require 'init-site-lisp) 
 ;; Must come before elpa, as it may provide package.el
 
-(require 'idle-require)
+;;(require 'idle-require)
 (require 'init-elpa)
 
 (require 'init-xterm)
@@ -18,7 +18,7 @@
 ;; It's dependent on init-site-lisp.el
 (if (file-exists-p "~/.custom.el") (load-file "~/.custom.el"))
 
-(setq inhibit-startup-message t)
+(setq inhibit-startup-message f)
 
 (show-paren-mode t)
 (setq show-paren-style 'parentheses)
@@ -26,12 +26,16 @@
 
 (auto-image-file-mode t) 
 ;;让Emacs可以直接打开、显示图片
+
 (fset 'yes-or-no-p 'y-or-n-p) 
 ;;以Y/N代表yes/no
+
 (setq auto-save-default nil) 
 ;;不生成名为#filename#的临时文件
+
 (setq x-select-enable-clipboard t) 
 ;;支持和外部程序的拷贝
+
 (global-font-lock-mode t) 
 ;;打开语法高亮
 
