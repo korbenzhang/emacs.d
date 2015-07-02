@@ -8,16 +8,17 @@
  ("/home/korbenzhang/gocodesrc/godemo/cmd/" . "hello/")
  ("/home/korbenzhang/gocodesrc/godemo/" . "cmd/")
  ("/home/korbenzhang/gocodesrc/" . "godemo/")
- ("/home/korbenzhang/" . ".emacs.d/")
+ ("/home/korbenzhang/" . #("testlab/" 0 4 (face flx-highlight-face)))
  ("/home/" . "korbenzhang/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
+ #("/home/korbenzhang/testlab/" 18 22 (face flx-highlight-face))
+ "/home/korbenzhang/gocodesrc/godemo/"
  "/home/korbenzhang/.emacs.d/"
  "/home/korbenzhang/"
  "/home/korbenzhang/gocodesrc/godemo/cmd/hello/"
- "/home/korbenzhang/gocodesrc/godemo/"
  "/home/korbenzhang/.emacs.d/golang/"
  "/home/korbenzhang/.emacs.d/golang/goflymake/"
  "/home/korbenzhang/gobetle/docs/"
@@ -28,6 +29,8 @@
 
 ;; ----- ido-work-file-list -----
 (
+ #("test.go" 0 4 (face flx-highlight-face))
+ "black_magic_test.go"
  "init.el"
  ".custom.el"
  "main.go"
@@ -36,15 +39,15 @@
  "go.el"
  "go-flycheck.el"
  "LICENSE"
- "golang.txt"
- "go_pkgs.sh"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/korbenzhang/.emacs.d/" (21909 37029 80136 900000) "ido.last" "lisp/" "./" ".gitignore" "package.el" "places" "thumbs/" "org-clock-save.el" ".session" "init.el" "site-lisp/" "elpa/" "auto-save-list/" "ido.last~" "go.el" "README.md" "ditaa0_9.jar" "snippets/" "misc/" ".git/" "../" "ac-comphist.dat" "golang/" "company-statistics-cache.el~" "company-statistics-cache.el" "LICENSE" "settings.el" "doc/")
+ ("/home/korbenzhang/" (21909 37176 28136 900000) "checkout/" ".node-gyp/" ".emacs.keyfreq" ".vimrc" ".vim/" "./" ".nviminfo" ".bash_profile" ".grails_history" ".gradle/" ".gemrc" ".zlogin" "gobetle/" "emacs/" ".nvimrc" "vendor/" ".zsh_history" "godemo/" ".zshrc" ".mongorc.js" ".gem/" ".gitconfig" "bin/" ".rvm/" "bootstrap/" ".gopm/" ".npm/" ".bzr.log" ".bashrc" "Desktop/" ".custom.el" "dev/" "gocodesrc/" ".oh-my-zsh/" ".zcompdump" "links/" ".mkshrc" ".zsh-update" ".envrc" "testlab/" "conf/" ".custom.el~" ".zshrc.pre-oh-my-zsh" ".ivy2/" ".bash_logout" ".bash_history" ".mysql_history" ".emacs.d/" ".gnupg/" ".bashrc.backup" ".bowerrc" ".config/" ".grails/" ".cache/" ".zcompdump-MPG-5.0.2" ".w3m/" "apps/" ".vendor/" "../" ".ceylon/" ".ssh/" ".dbshell" ".tmux.conf" ".smex-items" ".gvm/" "rundata/" "tmp/" ".m2/" ".local/" ".profile" ".bash_aliases" ".viminfo" ".lesshst" "import_sum.sh" ".nvm/" ".inputrc" "src/" ".nvimlog" ".zsh_favlist" ".tags/")
 
- ("/home/korbenzhang/" (21909 36954 688136 900000) "checkout/" ".node-gyp/" ".emacs.keyfreq" ".vimrc" ".vim/" "./" ".nviminfo" ".bash_profile" ".grails_history" ".gradle/" ".gemrc" ".zlogin" "gobetle/" "emacs/" ".nvimrc" "vendor/" ".zsh_history" "godemo/" ".zshrc" ".mongorc.js" ".gem/" ".gitconfig" "bin/" ".rvm/" "bootstrap/" ".gopm/" ".npm/" ".bzr.log" ".bashrc" "Desktop/" ".custom.el" "dev/" "gocodesrc/" ".oh-my-zsh/" ".zcompdump" "links/" ".mkshrc" ".zsh-update" ".envrc" "testlab/" "conf/" ".zshrc.pre-oh-my-zsh" ".ivy2/" ".bash_logout" ".bash_history" ".mysql_history" ".emacs.d/" ".gnupg/" ".bashrc.backup" ".bowerrc" ".config/" ".grails/" ".cache/" ".zcompdump-MPG-5.0.2" ".w3m/" "apps/" ".vendor/" "../" ".ceylon/" ".ssh/" ".dbshell" ".tmux.conf" ".smex-items" ".gvm/" "rundata/" "tmp/" ".m2/" ".local/" ".profile" ".bash_aliases" ".viminfo" ".lesshst" "import_sum.sh" ".nvm/" ".inputrc" "src/" ".nvimlog" ".zsh_favlist" ".tags/")
+ (#("/home/korbenzhang/testlab/" 18 22 (face flx-highlight-face)) (21886 52911 588136 900000) "./" "rails_demo/" "node_modules/" "express_demo/" "jekyll_demo/" "nodejs/" "latex/" "mvn_demos/" "black_magic.go" "ruby/" "ceylon_demo/" "test.go" "taps/" "../" "hello.go" "WebApplication/" "main.go" "grails_demo/" "mpd/" "spring_boots/" "xorm/")
+
+ ("/home/korbenzhang/.emacs.d/" (21909 37053 948136 900000) "ido.last" "lisp/" "./" ".gitignore" "package.el" "places" "thumbs/" "org-clock-save.el" ".session" "init.el" "site-lisp/" "elpa/" "auto-save-list/" "ido.last~" "go.el" "README.md" "ditaa0_9.jar" "snippets/" "misc/" ".git/" "../" "ac-comphist.dat" "golang/" "company-statistics-cache.el~" "company-statistics-cache.el" "LICENSE" "settings.el" "doc/")
 
  ("/home/korbenzhang/.emacs.d/golang/" (21909 36630 256136 900000) "./" "goflymake/" "oracle.el" "go-autocomplete.el" "../")
 
