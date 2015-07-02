@@ -159,6 +159,10 @@
 
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
+
+(require 'window-numbering)
+(window-numbering-mode 1)
+
 ;; GO
 (require 'go-mode-autoloads)
 (load "~/.emacs.d/go.el")
