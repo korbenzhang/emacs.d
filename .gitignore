@@ -18,3 +18,5 @@ ido.last
 org-clock-save.el
 places
 .session
+ac-comphist.dat
+
