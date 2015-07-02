@@ -3,8 +3,37 @@
 ;; author Korben Zhang
 ;; ======================================
 
-(setq emacs-load-start-time (current-time))
+(set-face-foreground 'region "cyan")
+(set-face-background 'region "blue")
+
+(set-face-foreground 'secondary-selection "skyblue")
+(set-face-background 'secondary-selection "darkblue")
+
+;;设置背景颜色
+(set-background-color "black")
+;;设置字体颜色
+(set-foreground-color "white")
+
+
+
+;;设置tab宽度为4
+(setq-default indent-tabs-mode  nil)
+(setq tab-width 4 c-basic-offset 4)
+;;(setq tab-width 4 indent-tabs-mode nil)
+
+;;高亮当前行
+;;(require 'hl-line)
+;;(global-hl-line-mode t)
+
+
+;;(setq emacs-load-start-time (current-time))
+
+
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
+
+;; Load Settings
+(load "~/.emacs.d/settings.el")
 
 ;;----------------------------------------------------------------------------
 ;; Which functionality to enable (use t or nil for true and false)
@@ -44,6 +73,7 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line
 
+
 (require 'init-modeline)
 (require 'cl-lib)
 (require 'init-compat)
@@ -53,12 +83,16 @@
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
+
 (require 'idle-require)
 (require 'init-elpa)
 (require 'init-exec-path) ;; Set up $PATH
 (require 'init-frame-hooks)
 ;; any file use flyspell should be initialized after init-spelling.el
 ;; actually, I don't know which major-mode use flyspell.
+
+;; theme first
+(require 'init-color-theme)
 
 (require 'init-spelling)
 (require 'init-xterm)
@@ -99,13 +133,13 @@
 ;;(require 'init-evil)
 (require 'init-sh)
 (require 'init-ctags)
-;;(require 'init-ace-jump-mode)
-;;(require 'init-bbdb)
-;;(require 'init-gnus)
-;;(require 'init-lua-mode)
+(require 'init-ace-jump-mode)
+(require 'init-bbdb)
+(require 'init-gnus)
+(require 'init-lua-mode)
 ;;(require 'init-workgroups2)
 (require 'init-term-mode)
-;;(require 'init-web-mode)
+(require 'init-web-mode)
 (require 'init-slime)
 (require 'init-clipboard)
 (require 'init-company)
@@ -116,7 +150,7 @@
 
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
-;;(require 'init-color-theme)
+
 ;;(require 'init-emacs-w3m)
 
 ;;(require 'init-html)
@@ -144,8 +178,6 @@
 ;;----------------------------------------------------------------------------
 (require 'init-locales)
 
-;; Load Settings
-(load "~/.emacs.d/settings.el")
 
 ;; my personal setup, other major-mode specific setup need it.
 ;; It's dependent on init-site-lisp.el
