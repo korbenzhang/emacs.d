@@ -74,7 +74,7 @@
 (require 'init-windows)
 (require 'init-sessions)
 ;;(require 'init-git)
-;;(require 'init-crontab)
+(require 'init-crontab)
 (require 'init-markdown)
 ;;(require 'init-erlang)
 (require 'init-javascript)
@@ -99,29 +99,31 @@
 ;;(require 'init-evil)
 (require 'init-sh)
 (require 'init-ctags)
-(require 'init-ace-jump-mode)
+;;(require 'init-ace-jump-mode)
 ;;(require 'init-bbdb)
-(require 'init-gnus)
+;;(require 'init-gnus)
 ;;(require 'init-lua-mode)
 ;;(require 'init-workgroups2)
-(require 'init-term-mode)
-(require 'init-web-mode)
+;;(require 'init-term-mode)
+;;(require 'init-web-mode)
 (require 'init-slime)
 (require 'init-clipboard)
 (require 'init-company)
-(require 'init-chinese-pyim) ;; cannot be idle-required
+;;(require 'init-chinese-pyim) ;; cannot be idle-required
 ;; need statistics of keyfreq asap
 (require 'init-keyfreq)
 ;;(require 'init-httpd)
 
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
-(require 'init-color-theme)
+;;(require 'init-color-theme)
 ;;(require 'init-emacs-w3m)
 
 ;;(require 'init-html)
 ;;(require 'init-haml)
 ;;(require 'init-sql)
+
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; GO
 (require 'go-mode-autoloads)

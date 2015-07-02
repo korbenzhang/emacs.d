@@ -58,3 +58,10 @@
 (global-set-key [M-up] 'windmove-up)
 (global-set-key [M-down] 'windmove-down)
 
+;; blink
+(setq scroll-step 1 scroll-margin 3 scroll-conservatively 10000)
+
+
+;; end of line
+(setq track-eol t)
+
