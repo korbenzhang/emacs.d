@@ -1,0 +1,7 @@
+;;; Automatically generated on Fri Jul  3 01:42:33 2015
+;;; Invoked by korbenzhang@MPG.crecg.com using 24.4.1
+(setq-default session-file-alist '(("~/.emacs.d/go.el" 504 504 1 nil nil 610 (overwrite-mode)) ("~/.emacs.d/init.el" 4464 1802 1 nil nil 4357 (overwrite-mode)) ("~/dev/gocodes/src/godemo/cmd/hello/main.go" 121 nil 1 nil nil 151 (overwrite-mode))))
+(setq-default file-name-history '("/home/korbenzhang/.emacs.d/site-lisp/go-mode/go-mode.el" "/home/korbenzhang/.emacs.d/go.el" #("/home/korbenzhang/.emacs.d/init.el" 18 26 (face flx-highlight-face)) #("/home/korbenzhang/gocodesrc/godemo/cmd/hello/main.go" 18 22 (face flx-highlight-face) 28 31 (face flx-highlight-face) 35 38 (face flx-highlight-face) 39 40 (face flx-highlight-face)) "~/.emacs.d/init.el" "~/.emacs.d/settings.el" "~/.emacs.d/go.el"))
+(setq-default command-history '((find-file "/home/korbenzhang/.emacs.d/site-lisp/go-mode/go-mode.el") (find-file "/home/korbenzhang/.emacs.d/go.el") (find-file #("/home/korbenzhang/.emacs.d/init.el" 18 26 ...)) (find-file #("/home/korbenzhang/gocodesrc/godemo/cmd/hello/main.go" 18 22 ... 28 31 ... 35 38 ... 39 40 ...)) (find-file "/home/korbenzhang/.emacs.d/init.el") (find-file "~/.emacs.d/init.el" t) (find-file "~/.emacs.d/settings.el" t) (find-file "~/.emacs.d/go.el" t)))
+(setq-default ido-file-history '("go-mode.el" "go.el" "init.el" "main.go"))
+(setq-default occur-collect-regexp-history '("\\1"))

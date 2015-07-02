@@ -1,5 +1,7 @@
+;; =====================================
+;; Emacs Config File
 ;; author Korben Zhang
-;; 
+;; ======================================
 
 (setq emacs-load-start-time (current-time))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
@@ -34,6 +36,14 @@
 (setq-default gc-cons-threshold (* 1024 1024 512)
               gc-cons-percentage 0.5)
 
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line
+
 (require 'init-modeline)
 (require 'cl-lib)
 (require 'init-compat)
@@ -49,134 +59,80 @@
 (require 'init-frame-hooks)
 ;; any file use flyspell should be initialized after init-spelling.el
 ;; actually, I don't know which major-mode use flyspell.
-;;(require 'init-spelling)
-;;(require 'init-xterm)
-;;(require 'init-gui-frames)
-;;(require 'init-ido)
+
+(require 'init-spelling)
+(require 'init-xterm)
+(require 'init-gui-frames)
+(require 'init-ido)
 (require 'init-dired)
-;;(require 'init-uniquify)
-;;(require 'init-ibuffer)
-;;(require 'init-flymake)
-;;(require 'init-smex)
-;;(require 'init-helm)
-;;(require 'init-hippie-expand)
-;;(require 'init-windows)
-;;(require 'init-sessions)
+(require 'init-uniquify)
+(require 'init-ibuffer)
+(require 'init-flymake)
+(require 'init-smex)
+(require 'init-helm)
+(require 'init-hippie-expand)
+(require 'init-windows)
+(require 'init-sessions)
 ;;(require 'init-git)
 ;;(require 'init-crontab)
 (require 'init-markdown)
 ;;(require 'init-erlang)
-;;(require 'init-javascript)
+(require 'init-javascript)
 (require 'init-org)
-;;(require 'init-org-mime)
-;;(require 'init-css)
+(require 'init-org-mime)
+(require 'init-css)
 ;;(require 'init-python-mode)
 ;;(require 'init-haskell)
 ;;(require 'init-ruby-mode)
-;;(require 'init-lisp)
-;;(require 'init-elisp)
-;;(require 'init-yasnippet)
+(require 'init-lisp)
+(require 'init-elisp)
+(require 'init-yasnippet)
 ;; Use bookmark instead
-;;(require 'init-zencoding-mode)
+(require 'init-zencoding-mode)
 ;;(require 'init-cc-mode)
 ;;(require 'init-gud)
 ;;(require 'init-linum-mode)
 ;; (require 'init-gist)
 ;;(require 'init-moz)
-;;(require 'init-gtags)
+(require 'init-gtags)
 ;; use evil mode (vi key binding)
 ;;(require 'init-evil)
-;;(require 'init-sh)
-;;(require 'init-ctags)
-;;(require 'init-ace-jump-mode)
+(require 'init-sh)
+(require 'init-ctags)
+(require 'init-ace-jump-mode)
 ;;(require 'init-bbdb)
-;;(require 'init-gnus)
+(require 'init-gnus)
 ;;(require 'init-lua-mode)
 ;;(require 'init-workgroups2)
-;;(require 'init-term-mode)
-;;(require 'init-web-mode)
-;;(require 'init-slime)
-;;(require 'init-clipboard)
-;;(require 'init-company)
-;;(require 'init-chinese-pyim) ;; cannot be idle-required
+(require 'init-term-mode)
+(require 'init-web-mode)
+(require 'init-slime)
+(require 'init-clipboard)
+(require 'init-company)
+(require 'init-chinese-pyim) ;; cannot be idle-required
 ;; need statistics of keyfreq asap
-;;(require 'init-keyfreq)
+(require 'init-keyfreq)
 ;;(require 'init-httpd)
 
-;; projectile costs 7% startup time
-
 ;; misc has some crucial tools I need immediately
-;;(require 'init-misc)
-;;(require 'init-color-theme)
+(require 'init-misc)
+(require 'init-color-theme)
 ;;(require 'init-emacs-w3m)
 
-;;(require 'cl-lib)
-;;(require 'init-xterm)
-;;(require 'init-auto-complete)
-;;(require 'init-git)
-;;(require 'init-github)
-;;(require 'init-compile)
-;;(require 'init-textile)
-;;(require 'init-markdown)
-;;(require 'init-org)
-;;(require 'init-nxml)
 ;;(require 'init-html)
-;;(require 'init-css)
 ;;(require 'init-haml)
 ;;(require 'init-sql)
+
+;; GO
+(require 'go-mode-autoloads)
+(load "~/.emacs.d/go.el")
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
 ;;----------------------------------------------------------------------------
-;;(require 'server)
-;;(unless (server-running-p)
-;;  (server-start))
-
-(setq inhibit-startup-message nil)
-
-(show-paren-mode t)
-(setq show-paren-style 'parentheses)
-;;(setq frame-title-format "%b %I")
-
-(auto-image-file-mode t) 
-;;让Emacs可以直接打开、显示图片
-
-(fset 'yes-or-no-p 'y-or-n-p) 
-;;以Y/N代表yes/no
-
-(setq auto-save-default nil) 
-;;不生成名为#filename#的临时文件
-
-(setq x-select-enable-clipboard t) 
-;;支持和外部程序的拷贝
-
-(global-font-lock-mode t) 
-;;打开语法高亮
-
-;;(set-language-environment 'UTF-8)
-;;(set-locale-environment "UTF-8")
-;;(set-default-font "Consolas 16")
-
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(icomplete-mode 1)
-(scroll-bar-mode -1)
-
-(display-time-mode 1)
-(setq display-time-24hr-format t)
-(setq display-time-day-and-date t) 
-
-(fset 'yes-or-no-p 'y-or-n-p) 
-(auto-compression-mode 1)   
-
-(show-paren-mode 1)
-(setq visible-bell -1)
-
-(setq inhibit-startup-message t)   
-(setq gnus-inhibit-startup-message t)   
-
-(setq x-select-enable-clipboard t)  
-
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 
 (idle-require-mode 1) ;; starts loading
@@ -186,10 +142,11 @@
 ;;----------------------------------------------------------------------------
 (require 'init-locales)
 
+;; Load Settings
+(load "~/.emacs.d/settings.el")
+
 ;; my personal setup, other major-mode specific setup need it.
 ;; It's dependent on init-site-lisp.el
 (if (file-exists-p "~/.custom.el") (load-file "~/.custom.el"))
 
-
 ;; EOF
-

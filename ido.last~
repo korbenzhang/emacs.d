@@ -1,0 +1,43 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/korbenzhang/gocodesrc/godemo/cmd/" . "hello/")
+ ("/home/korbenzhang/gocodesrc/godemo/" . "cmd/")
+ ("/home/korbenzhang/gocodesrc/" . "godemo/")
+ ("/home/korbenzhang/" . "gocodesrc/")
+ ("/home/" . "korbenzhang/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/korbenzhang/.emacs.d/"
+ "/home/korbenzhang/gocodesrc/godemo/cmd/hello/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "go.el"
+ "init.el"
+ "main.go"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/korbenzhang/.emacs.d/" (21909 30534 348136 900000) "ido.last" "lisp/" "./" ".gitignore" "places" "thumbs/" "org-clock-save.el" ".session" "init.el" "site-lisp/" "elpa/" "auto-save-list/" "go.el" "README.md" "ditaa0_9.jar" "snippets/" "misc/" ".git/" "../" "ac-comphist.dat" "company-statistics-cache.el~" "company-statistics-cache.el" "LICENSE" "go.el~" "settings.el")
+
+ ("/home/korbenzhang/gocodesrc/godemo/cmd/hello/" (21909 30385 76136 900000) "./" "main.go~" "../" "main.go")
+
+ ("/home/korbenzhang/gocodesrc/godemo/cmd/" (21906 14643 540136 900000) "stat_demo/" "./" "hello/" "../")
+
+ ("/home/korbenzhang/gocodesrc/godemo/" (21871 65323 104136 900000) "./" "Makefile" "black_magic_test.go" "cmd/" "../" "hello.go")
+
+ ("/home/korbenzhang/gocodesrc/" (21906 14501 708136 900000) "./" "Makefile" "godemo/" "gopkg.in/" "code.google.com/" "labix.org/" "update_tags2.sh" "9fans.net/" "mabetle/" "golang.org/" "../" "tags" "revel_demo/" "github.com/")
+
+ ("/home/" (21714 14954 516135 400000) "./" "../" "korbenzhang/")
+
+ ("/home/korbenzhang/" (21909 30302 936136 900000) "checkout/" ".node-gyp/" ".emacs.keyfreq" ".vimrc" ".vim/" "./" ".nviminfo" ".bash_profile" ".grails_history" ".gradle/" ".gemrc" ".zlogin" "gobetle/" "emacs.d-master/" ".nvimrc" "vendor/" ".zsh_history" "godemo/" ".zshrc" "purcell_emacs.d/" ".mongorc.js" ".gem/" ".gitconfig" "bin/" ".rvm/" "bootstrap/" ".gopm/" ".npm/" ".bzr.log" ".bashrc" "Desktop/" "dev/" "gocodesrc/" ".oh-my-zsh/" ".zcompdump" "links/" ".mkshrc" ".zsh-update" ".envrc" "testlab/" "conf/" ".zshrc.pre-oh-my-zsh" ".ivy2/" ".bash_logout" ".bash_history" ".mysql_history" ".emacs.d/" ".gnupg/" ".bashrc.backup" ".bowerrc" ".config/" ".grails/" ".cache/" ".zcompdump-MPG-5.0.2" ".w3m/" "apps/" ".vendor/" "../" ".ceylon/" ".ssh/" ".dbshell" ".tmux.conf" ".gvm/" "rundata/" "tmp/" ".m2/" ".local/" ".profile" ".bash_aliases" ".viminfo" ".lesshst" "import_sum.sh" ".nvm/" ".inputrc" "src/" ".nvimlog" ".zsh_favlist" ".tags/")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
