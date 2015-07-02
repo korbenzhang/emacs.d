@@ -24,7 +24,7 @@
 
 (set-language-environment 'UTF-8)
 (set-locale-environment "UTF-8")
-(set-default-font "Consolas 16")
+;;(set-default-font "Consolas 16")
 
 
 (setq transient-mark-mode nil)
