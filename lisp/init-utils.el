@@ -1,11 +1,14 @@
-(if (fboundp 'with-eval-after-load)
-    (defalias 'after-load 'with-eval-after-load)
-  (defmacro after-load (feature &rest body)
-    "After FEATURE is loaded, evaluate BODY."
-    (declare (indent defun))
-    `(eval-after-load ,feature
-       '(progn ,@body))))
-
+;; elisp version of try...catch...finally
+(defmacro safe-wrap (fn &rest clean-up)
+  `(unwind-protect
+       (let (retval)
+         (condition-case ex
+             (setq retval (progn ,fn))
+           ('error
+            (message (format "Caught exception: [%s]" ex))
+            (setq retval (cons 'exception (list ex)))))
+         retval)
+     ,@clean-up))
 
 ;;----------------------------------------------------------------------------
 ;; Handier way to add modes to auto-mode-alist
@@ -19,7 +22,7 @@
 ;;----------------------------------------------------------------------------
 ;; String utilities missing from core emacs
 ;;----------------------------------------------------------------------------
-(defun sanityinc/string-all-matches (regex str &optional group)
+(defun string-all-matches (regex str &optional group)
   "Find all matches for `REGEX' within `STR', returning the full match string or group `GROUP'."
   (let ((result nil)
         (pos 0)
@@ -29,16 +32,16 @@
       (setq pos (match-end group)))
     result))
 
-(defun sanityinc/string-rtrim (str)
+(defun string-rtrim (str)
   "Remove trailing whitespace from `STR'."
-  (replace-regexp-in-string "[ \t\n]+$" "" str))
+  (replace-regexp-in-string "[ \t\n]*$" "" str))
 
 
 ;;----------------------------------------------------------------------------
 ;; Find the directory containing a given library
 ;;----------------------------------------------------------------------------
 (autoload 'find-library-name "find-func")
-(defun sanityinc/directory-of-library (library-name)
+(defun directory-of-library (library-name)
   "Return the directory in which the `LIBRARY-NAME' load file is found."
   (file-name-as-directory (file-name-directory (find-library-name library-name))))
 
@@ -69,10 +72,10 @@
     (if (get-buffer new-name)
         (message "A buffer named '%s' already exists!" new-name)
       (progn
-        (when (file-exists-p filename)
-         (rename-file filename new-name 1))
+        (rename-file filename new-name 1)
         (rename-buffer new-name)
-        (set-visited-file-name new-name)))))
+        (set-visited-file-name new-name)
+        (set-buffer-modified-p nil)))))
 
 ;;----------------------------------------------------------------------------
 ;; Browse current HTML file
@@ -80,10 +83,47 @@
 (defun browse-current-file ()
   "Open the current file as a URL using `browse-url'."
   (interactive)
-  (let ((file-name (buffer-file-name)))
-    (if (tramp-tramp-file-p file-name)
-        (error "Cannot open tramp file")
-      (browse-url (concat "file://" file-name)))))
+  (browse-url-generic (concat "file://" (buffer-file-name))))
 
+
+(require 'cl)
+
+(defmacro with-selected-frame (frame &rest forms)
+  (let ((prev-frame (gensym))
+        (new-frame (gensym)))
+    `(progn
+       (let* ((,new-frame (or ,frame (selected-frame)))
+              (,prev-frame (selected-frame)))
+         (select-frame ,new-frame)
+         (unwind-protect
+             (progn ,@forms)
+           (select-frame ,prev-frame))))))
+
+(defvar load-user-customized-major-mode-hook t)
+(defvar cached-normal-file-full-path nil)
+(defun is-buffer-file-temp ()
+  (interactive)
+  "If (buffer-file-name) is nil or a temp file or HTML file converted from org file"
+  (let ((f (buffer-file-name))
+        org
+        (rlt t))
+    (cond
+     ((not load-user-customized-major-mode-hook) t)
+     ((not f)
+      ;; file does not exist at all
+      (setq rlt t))
+     ((string= f cached-normal-file-full-path)
+      (setq rlt nil))
+     ((string-match (concat "^" temporary-file-directory) f)
+      ;; file is create from temp directory
+      (setq rlt t))
+     ((and (string-match "\.html$" f)
+           (file-exists-p (setq org (replace-regexp-in-string "\.html$" ".org" f))))
+      ;; file is a html file exported from org-mode
+      (setq rlt t))
+     (t
+      (setq cached-normal-file-full-path f)
+      (setq rlt nil)))
+    rlt))
 
 (provide 'init-utils)

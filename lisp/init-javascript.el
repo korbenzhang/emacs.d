@@ -1,101 +1,259 @@
-(maybe-require-package 'json-mode)
-(maybe-require-package 'js2-mode)
-(maybe-require-package 'ac-js2)
-(maybe-require-package 'coffee-mode)
-(require-package 'js-comint)
-
-(defcustom preferred-javascript-mode
-  (first (remove-if-not #'fboundp '(js2-mode js-mode)))
-  "Javascript mode to use for .js files."
-  :type 'symbol
-  :group 'programming
-  :options '(js2-mode js-mode))
-
-(defconst preferred-javascript-indent-level 2)
-
-;; Need to first remove from list if present, since elpa adds entries too, which
 ;; may be in an arbitrary order
 (eval-when-compile (require 'cl))
-(setq auto-mode-alist (cons `("\\.\\(js\\|es6\\)\\(\\.erb\\)?\\'" . ,preferred-javascript-mode)
-                            (loop for entry in auto-mode-alist
-                                  unless (eq preferred-javascript-mode (cdr entry))
-                                  collect entry)))
 
+;; json
+(setq auto-mode-alist (cons '("\\.json$" . json-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.jason$" . json-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.jshintrc$" . json-mode) auto-mode-alist))
 
-;; js2-mode
+;; {{ js2-mode or javascript-mode
+(setq js2-use-font-lock-faces t
+      js2-mode-must-byte-compile nil
+      js2-idle-timer-delay 0.5 ;; could not be too big for real time syntax check
+      js2-indent-on-enter-key t
+      js2-skip-preprocessor-directives t
+      js2-auto-indent-p t
+      js2-bounce-indent-p t)
 
-;; Change some defaults: customize them to override
-(setq-default js2-basic-offset 2
-              js2-bounce-indent-p nil)
-(after-load 'js2-mode
-  ;; Disable js2 mode's syntax error highlighting by default...
-  (setq-default js2-mode-show-parse-errors nil
-                js2-mode-show-strict-warnings nil)
-  ;; ... but enable it if flycheck can't handle javascript
-  (autoload 'flycheck-get-checker-for-buffer "flycheck")
-  (defun sanityinc/disable-js2-checks-if-flycheck-active ()
-    (unless (flycheck-get-checker-for-buffer)
-      (set (make-local-variable 'js2-mode-show-parse-errors) t)
-      (set (make-local-variable 'js2-mode-show-strict-warnings) t)))
-  (add-hook 'js2-mode-hook 'sanityinc/disable-js2-checks-if-flycheck-active)
+(setq javascript-common-imenu-regex-list
+      '(("Controller" "[. \t]controller([ \t]*['\"]\\([^'\"]+\\)" 1)
+        ("Controller" "[. \t]controllerAs:[ \t]*['\"]\\([^'\"]+\\)" 1)
+        ("Filter" "[. \t]filter([ \t]*['\"]\\([^'\"]+\\)" 1)
+        ("State" "[. \t]state([ \t]*['\"]\\([^'\"]+\\)" 1)
+        ("Factory" "[. \t]factory([ \t]*['\"]\\([^'\"]+\\)" 1)
+        ("Service" "[. \t]service([ \t]*['\"]\\([^'\"]+\\)" 1)
+        ("Module" "[. \t]module([ \t]*['\"]\\([a-zA-Z0-9_\.]+\\)" 1)
+        ("ngRoute" "[. \t]when(\\(['\"][a-zA-Z0-9_\/]+['\"]\\)" 1)
+        ("Directive" "[. \t]directive([ \t]*['\"]\\([^'\"]+\\)" 1)
+        ("Event" "[. \t]\$on([ \t]*['\"]\\([^'\"]+\\)" 1)
+        ("Config" "[. \t]config([ \t]*function *( *\\([^\)]+\\)" 1)
+        ("Config" "[. \t]config([ \t]*\\[ *['\"]\\([^'\"]+\\)" 1)
+        ("OnChange" "[ \t]*\$(['\"]\\([^'\"]*\\)['\"]).*\.change *( *function" 1)
+        ("OnClick" "[ \t]*\$([ \t]*['\"]\\([^'\"]*\\)['\"]).*\.click *( *function" 1)
+        ("Watch" "[. \t]\$watch( *['\"]\\([^'\"]+\\)" 1)
+        ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+        ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+        ("Task" "[. \t]task([ \t]*['\"]\\([^'\"]+\\)" 1)
+        ))
 
-  (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS2")))
+;; js-mode imenu enhancement
+;; @see http://stackoverflow.com/questions/20863386/idomenu-not-working-in-javascript-mode
+(defun mo-js-imenu-make-index ()
+  (save-excursion
+    (imenu--generic-function javascript-common-imenu-regex-list)))
 
-  (after-load 'js2-mode
-    (js2-imenu-extras-setup)))
+(defun mo-js-mode-hook ()
+  (unless (is-buffer-file-temp)
+    (setq imenu-create-index-function 'mo-js-imenu-make-index)
+    ;; https://github.com/illusori/emacs-flymake
+    ;; javascript support is out of the box
+    ;; DONOT jslint json
+    ;; (add-to-list 'flymake-allowed-file-name-masks
+    ;;              '("\\.json\\'" flymake-javascript-init))
+    (flymake-mode 1)))
 
-;; js-mode
-(setq-default js-indent-level preferred-javascript-indent-level)
+(add-hook 'js-mode-hook 'mo-js-mode-hook)
 
+;; {{ patching imenu in js2-mode
+(setq js2-imenu-extra-generic-expression javascript-common-imenu-regex-list)
 
-(add-to-list 'interpreter-mode-alist (cons "node" preferred-javascript-mode))
+(defvar js2-imenu-original-item-lines nil
+  "List of line infomration of original imenu items.")
 
-
-;; Javascript nests {} and () a lot, so I find this helpful
+(defun js2-imenu--get-line-start-end (pos)
+  (let (b e)
+    (save-excursion
+      (goto-char pos)
+      (setq b (line-beginning-position))
+      (setq e (line-end-position)))
+    (list b e)))
 
-(require-package 'rainbow-delimiters)
-(dolist (hook '(js2-mode-hook js-mode-hook json-mode-hook))
-  (add-hook hook 'rainbow-delimiters-mode))
+(defun js2-imenu--get-pos (item)
+  (let (val)
+    (cond
+     ((integerp item)
+      (setq val item))
 
+     ((markerp item)
+      (setq val (marker-position item))))
 
-
-;;; Coffeescript
+    val))
 
-(after-load 'coffee-mode
-  (setq coffee-js-mode preferred-javascript-mode
-        coffee-tab-width preferred-javascript-indent-level))
+(defun js2-imenu--get-extra-item-pos (item)
+  (let (val)
+    (cond
+     ((integerp item)
+      (setq val item))
 
-(when (fboundp 'coffee-mode)
-  (add-to-list 'auto-mode-alist '("\\.coffee\\.erb\\'" . coffee-mode)))
+     ((markerp item)
+      (setq val (marker-position item)))
 
-;; ---------------------------------------------------------------------------
-;; Run and interact with an inferior JS via js-comint.el
-;; ---------------------------------------------------------------------------
+     ;; plist
+     ((and (listp item) (listp (cdr item)))
+      (setq val (js2-imenu--get-extra-item-pos (cadr item))))
 
-(setq inferior-js-program-command "js")
+     ;; alist
+     ((and (listp item) (not (listp (cdr item))))
+      (setq val (js2-imenu--get-extra-item-pos (cdr item)))))
 
-(defvar inferior-js-minor-mode-map (make-sparse-keymap))
-(define-key inferior-js-minor-mode-map "\C-x\C-e" 'js-send-last-sexp)
-(define-key inferior-js-minor-mode-map "\C-\M-x" 'js-send-last-sexp-and-go)
-(define-key inferior-js-minor-mode-map "\C-cb" 'js-send-buffer)
-(define-key inferior-js-minor-mode-map "\C-c\C-b" 'js-send-buffer-and-go)
-(define-key inferior-js-minor-mode-map "\C-cl" 'js-load-file-and-go)
+    val))
 
-(define-minor-mode inferior-js-keys-mode
-  "Bindings for communicating with an inferior js interpreter."
-  nil " InfJS" inferior-js-minor-mode-map)
+(defun js2-imenu--extract-line-info (item)
+  "Recursively parse the original imenu items created by js2-mode.
+The line numbers of items will be extracted."
+  (let (val)
+    (if item
+      (cond
+       ;; Marker or line number
+       ((setq val (js2-imenu--get-pos item))
+        (push (js2-imenu--get-line-start-end val)
+              js2-imenu-original-item-lines))
 
-(dolist (hook '(js2-mode-hook js-mode-hook))
-  (add-hook hook 'inferior-js-keys-mode))
+       ;; The item is Alist, example: (hello . 163)
+       ((and (listp item) (not (listp (cdr item))))
+        (setq val (js2-imenu--get-pos (cdr item)))
+        (if val (push (js2-imenu--get-line-start-end val)
+                      js2-imenu-original-item-lines)))
 
-;; ---------------------------------------------------------------------------
-;; Alternatively, use skewer-mode
-;; ---------------------------------------------------------------------------
+       ;; The item is a Plist
+       ((and (listp item) (listp (cdr item)))
+        (js2-imenu--extract-line-info (cadr item))
+        (js2-imenu--extract-line-info (cdr item)))
 
-(when (maybe-require-package 'skewer-mode)
-  (after-load 'skewer-mode
-    (add-hook 'skewer-mode-hook
-              (lambda () (inferior-js-keys-mode -1)))))
+       ;;Error handling
+       (t (message "Impossible to here! item=%s" item)
+          )))
+    ))
 
+(defun js2-imenu--item-exist (pos lines)
+  "Try to detect does POS belong to some LINE"
+  (let (rlt)
+    (dolist (line lines)
+      (if (and (< pos (cadr line)) (>= pos (car line)))
+          (setq rlt t)))
+    rlt))
+
+(defun js2-imenu--is-item-already-created (item)
+  (unless (js2-imenu--item-exist
+           (js2-imenu--get-extra-item-pos item)
+           js2-imenu-original-item-lines)
+    item))
+
+(defun js2-imenu--check-single-item (r)
+  (cond
+   ((and (listp (cdr r)))
+    (let (new-types)
+      (setq new-types
+            (delq nil (mapcar 'js2-imenu--is-item-already-created (cdr r))))
+      (if new-types (setcdr r (delq nil new-types))
+        (setq r nil))))
+   (t (if (js2-imenu--item-exist (js2-imenu--get-extra-item-pos r)
+                                 js2-imenu-original-item-lines)
+          (setq r nil))))
+  r)
+
+(defun js2-imenu--remove-duplicate-items (extra-rlt)
+  (delq nil (mapcar 'js2-imenu--check-single-item extra-rlt)))
+
+(defun js2-imenu--merge-imenu-items (rlt extra-rlt)
+  "RLT contains imenu items created from AST.
+EXTRA-RLT contains items parsed with simple regex.
+Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
+  ;; Clear the lines.
+  (set (make-variable-buffer-local 'js2-imenu-original-item-lines) nil)
+  ;; Analyze the original imenu items created from AST,
+  ;; I only care about line number.
+  (dolist (item rlt)
+    (js2-imenu--extract-line-info item))
+
+  ;; @see https://gist.github.com/redguardtoo/558ea0133daa72010b73#file-hello-js
+  ;; EXTRA-RLT sample:
+  ;; ((function ("hello" . #<marker 63>) ("bye" . #<marker 128>))
+  ;;  (controller ("MyController" . #<marker 128))
+  ;;  (hellworld . #<marker 161>))
+  (setq extra-rlt (js2-imenu--remove-duplicate-items extra-rlt))
+  (append rlt extra-rlt))
+
+(eval-after-load 'js2-mode
+  '(progn
+     (defadvice js2-mode-create-imenu-index (around my-js2-mode-create-imenu-index activate)
+       (let (rlt extra-rlt)
+         ad-do-it
+         (setq extra-rlt
+               (save-excursion
+                 (imenu--generic-function js2-imenu-extra-generic-expression)))
+         (setq ad-return-value (js2-imenu--merge-imenu-items ad-return-value extra-rlt))
+         ad-return-value))
+     (require 'js2-refactor)
+     (js2r-add-keybindings-with-prefix "C-c C-m")))
+;; }}
+
+(defun my-js2-mode-setup()
+  (unless (is-buffer-file-temp)
+    ;; looks nodejs is more popular, if you prefer rhino, change to "js"
+    (setq inferior-js-program-command "node --interactive")
+    (require 'js-comint)
+    ;; if use node.js, we need nice output
+    (setenv "NODE_NO_READLINE" "1")
+    (js2-imenu-extras-mode)
+    (setq mode-name "JS2")
+    (flymake-mode -1)
+    (require 'js-doc)
+    (define-key js2-mode-map "\C-cd" 'js-doc-insert-function-doc)
+    (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+
+(autoload 'js2-mode "js2-mode" nil t)
+(add-hook 'js2-mode-hook 'my-js2-mode-setup)
+
+(cond
+ ((not *no-memory*)
+  (setq auto-mode-alist (cons '("\\.js\\(\\.erb\\)?\\'" . js2-mode) auto-mode-alist))
+  (setq auto-mode-alist (cons '("\\.ts\\'" . js2-mode) auto-mode-alist))
+  (add-to-list 'interpreter-mode-alist (cons "node" 'js2-mode)))
+ (t
+  (setq auto-mode-alist (cons '("\\.js\\(\\.erb\\)?\\'" . js-mode) auto-mode-alist))
+  (setq auto-mode-alist (cons '("\\.ts\\'" . js-mode) auto-mode-alist))
+  ))
+;; }}
+
+(add-hook 'coffee-mode-hook 'flymake-coffee-load)
+
+;; @see https://github.com/Sterlingg/json-snatcher
+(autoload 'jsons-print-path "json-snatcher" nil t)
+
+;; {{ js-beautify
+(defun js-beautify ()
+  "Beautify a region of javascript using the code from jsbeautify.org.
+sudo pip install jsbeautifier"
+  (interactive)
+  (let ((orig-point (point)))
+    (unless (mark)
+      (mark-defun))
+    (shell-command-on-region (point)
+                             (mark)
+                             (concat "js-beautify"
+                                     " --stdin "
+                                     " --jslint-happy --brace-style=end-expand --keep-array-indentation "
+                                     (format " --indent-size=%d " js2-basic-offset))
+                             nil t)
+    (goto-char orig-point)))
+;; }}
+
+;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
+;; add any symbols to a buffer-local var of acceptable global vars
+;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
+;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
+;; you can;t have a symbol called "someName:false"
+(add-hook 'js2-post-parse-callbacks
+          (lambda ()
+            (when (> (buffer-size) 0)
+              (let ((btext (replace-regexp-in-string
+                            ": *true" " "
+                            (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
+                (mapc (apply-partially 'add-to-list 'js2-additional-externs)
+                      (split-string
+                       (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
+                       " *, *" t))
+                ))))
 
 (provide 'init-javascript)
