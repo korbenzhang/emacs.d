@@ -18,11 +18,11 @@
 ;; It's dependent on init-site-lisp.el
 (if (file-exists-p "~/.custom.el") (load-file "~/.custom.el"))
 
-(setq inhibit-startup-message f)
+(setq inhibit-startup-message nil)
 
 (show-paren-mode t)
 (setq show-paren-style 'parentheses)
-(setq frame-title-format "%b %I")
+;;(setq frame-title-format "%b %I")
 
 (auto-image-file-mode t) 
 ;;让Emacs可以直接打开、显示图片
