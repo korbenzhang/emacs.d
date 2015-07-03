@@ -1,12 +1,24 @@
 ;;; -*- coding: utf-8 -*-
-(("/home/korbenzhang/.emacs.d/golang/go.el" . 1238)
- ("/home/korbenzhang/.emacs.d/init.el" . 173)
+(("/home/korbenzhang/.emacs.d/init.el" . 1720)
+ ("/home/korbenzhang/.emacs.d/company-statistics-cache.el" . 2323)
+ ("/home/korbenzhang/.emacs.d/plugin.d/tabbar.el" . 145)
+ ("/home/korbenzhang/.custom.el" . 168)
+ ("/home/korbenzhang/.emacs.d/settings.el" . 3874)
+ ("/home/korbenzhang/.emacs.d/"
+  (dired-filename . "/home/korbenzhang/.emacs.d/company-statistics-cache.el~"))
+ ("/home/korbenzhang/.emacs.d/custom.el" . 701)
+ ("/home/korbenzhang/.emacs.d/site-lisp/"
+  (dired-filename . "/home/korbenzhang/.emacs.d/site-lisp/vimrc-mode"))
+ ("/home/korbenzhang/.emacs.d/site-lisp/vimrc-mode/"
+  (dired-filename . "/home/korbenzhang/.emacs.d/site-lisp/vimrc-mode/vimrc-mode.el"))
+ ("/home/korbenzhang/.emacs.d/site-lisp/vimrc-mode/vimrc-mode.el" . 17072)
+ ("/home/korbenzhang/.emacs.d/elpa/grizzl-0.1.1/grizzl-autoloads.el" . 2270)
+ ("/home/korbenzhang/.emacs.d/ext.el" . 2)
+ ("/home/korbenzhang/.emacs.d/package.el" . 370)
  ("/home/korbenzhang/.emacs.d/golang/go-autocomplete.el" . 942)
- ("/home/korbenzhang/.emacs.d/company-statistics-cache.el" . 2119)
  ("/home/korbenzhang/gocodesrc/github.com/nsf/gocode/emacs/go-autocomplete.el" . 6727)
  ("/home/korbenzhang/gocodesrc/godemo/cmd/hello/main.go" . 155)
  ("/home/korbenzhang/.emacs.d/elpa/go-autocomplete-20150303/go-autocomplete-autoloads.el" . 252)
- ("/home/korbenzhang/.emacs.d/package.el" . 149)
  ("/home/korbenzhang/.emacs.d/elpa/go-eldoc-0.25/go-eldoc-autoloads.el" . 341)
  ("/home/korbenzhang/.emacs.d/elpa/go-mode-1.3.0/go-mode-autoloads.el" . 2904)
  ("/home/korbenzhang/.emacs.d/site-lisp/go-errcheck/go-errcheck.el" . 1678)
@@ -14,8 +26,5 @@
   (dired-filename . "/home/korbenzhang/.emacs.d/snippets/snippet-mode"))
  ("/home/korbenzhang/.emacs.d/.gitignore" . 33)
  ("/home/korbenzhang/.emacs.d/places" . 27)
- ("/home/korbenzhang/.emacs.d/"
-  (dired-filename . "/home/korbenzhang/.emacs.d/init.el"))
  ("/home/korbenzhang/.emacs.d/lisp/"
-  (dired-filename . "/home/korbenzhang/.emacs.d/lisp/init-csv.el"))
- ("/home/korbenzhang/.emacs.d/settings.el" . 1227))
+  (dired-filename . "/home/korbenzhang/.emacs.d/lisp/init-csv.el")))
