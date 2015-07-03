@@ -107,6 +107,7 @@
 ;(global-set-key (kbd "") 'swbuff-switch-to-previous-buffer)
 ;(global-set-key (kbd "") 'swbuff-switch-to-next-buffer)
 
+(require 'move-text)
 
 ;; Go Lang
 (require 'go-mode-autoloads)
@@ -123,8 +124,29 @@
 (require 'init-locales)
 
 ;;(load "~/.emacs.d/ext.el")
-(load "~/.emacs.d/plugin.d/tabbar.el")
+;;(load "~/.emacs.d/plugin.d/tabbar.el")
 
 ;; personal setup
 (if (file-exists-p "~/.custom.el
 ") (load-file "~/.custom.el"))
+
+;; Auto Save
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(display-time-mode t)
+ '(menu-bar-mode nil)
+ '(safe-local-variable-values (quote ((no-byte-compile t))))
+ '(session-use-package t nil (session))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil)
+ '(transient-mark-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Monaco" :foundry "apple" :slant normal :weight normal :height 151 :width normal))))
+ '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold))) t))
