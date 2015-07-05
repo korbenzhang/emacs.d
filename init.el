@@ -114,9 +114,8 @@
 (load "~/.emacs.d/go.el")
 
 ;; Allow access from emacsclient
-(require 'server)
-(unless (server-running-p)
-  (server-start))
+;;(require 'server)
+;;(unless (server-running-p)(server-start))
 
 (idle-require-mode 1) ;; starts loading
 
@@ -142,10 +141,11 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(transient-mark-mode nil))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Monaco" :foundry "apple" :slant normal :weight normal :height 151 :width normal))))
+ '(default ((t (:family "Monaco" :foundry "apple" :slant normal :weight normal :height 131 :width normal))))
  '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold))) t))
