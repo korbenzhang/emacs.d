@@ -127,8 +127,7 @@
 ;;(load "~/.emacs.d/plugin.d/tabbar.el")
 
 ;; personal setup
-(if (file-exists-p "~/.custom.el
-") (load-file "~/.custom.el"))
+(if (file-exists-p "~/.custom.el") (load-file "~/.custom.el"))
 
 ;; Auto Save
 (custom-set-variables
