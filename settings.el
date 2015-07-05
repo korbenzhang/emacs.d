@@ -195,3 +195,7 @@
                     (interactive) (insert ", ")))
 
 
+;;; dired recursive-edit
+(setq dired-recursive-copies 'top)
+(setq dired-recursive-deletes 'top)
+
