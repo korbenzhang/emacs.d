@@ -95,11 +95,6 @@
 (require 'go-mode-autoloads)
 (load "~/.emacs.d/go.el")
 
-;; Allow access from emacsclient
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 (idle-require-mode 1) ;; starts loading
 
 ;; Locales (setting them earlier in this file doesn't work in X)
