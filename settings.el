@@ -153,7 +153,7 @@
 (setq scroll-step 1 scroll-margin 3 scroll-conservatively 10000)
 
 ;; end of line
-(setq track-eol t)
+;;(setq track-eol t)
 
 ;; Keys
 ;;----------------------------------------------------------------------------
@@ -168,18 +168,19 @@
 ;; 跳转到 Emacs 的另一个buffer窗口
 
 ;;Ctrl+F11:复制区域到寄存器
-(global-set-key [C-f11] 'copy-to-register)
+;;(global-set-key [C-f11] 'copy-to-register)
+
 ;;F11:粘贴寄存器内容
-(global-set-key [(f11)] 'insert-register)
+;;(global-set-key [(f11)] 'insert-register)
 
 (global-set-key (kbd "C-x c") 'copy-lines)        ;;复制一行或者多行
 (global-set-key (kbd "C-x d") 'zl-delete-line)    ;;删除一行
 
 
-(global-set-key [C-f9] 'dired)
+;;(global-set-key [C-f9] 'dired)
 ;;设置[C-f9]为调用dired命令
 
-(global-set-key [C-f10] 'undo)
+;;(global-set-key [C-f10] 'undo)
 ;;设置C-F10为撤销
 
 ;; backtab swith buffer
@@ -193,7 +194,6 @@
 ;; add space after ,
 (global-set-key (kbd ",") #'(lambda ()
                     (interactive) (insert ", ")))
-
 
 ;;; dired recursive-edit
 (setq dired-recursive-copies 'top)

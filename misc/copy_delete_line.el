@@ -25,4 +25,4 @@
                     (progn
                       (kill-region (line-beginning-position)
                                    (line-end-position))
-                           (message "killed line")))))
+                      (message "killed line")))))

@@ -2,12 +2,12 @@
 ;;; ========================================================
 
 ;;;;
-(add-to-list 'load-path
-                     "~/.emacs.d/ecb-2.40")    ;你的ecb解压目录
+(add-to-list 'load-path "~/.emacs.d/ecb-2.40")    ;你的ecb解压目录
+
 (require 'ecb)
 (require 'ecb-autoloads)
 
-(global-set-key (kbd "<f7>") 'ecb-minor-mode)   ; 打开ejb
+;;(global-set-key (kbd "<f7>") 'ecb-minor-mode)   ; 打开ejb
 
 ;;;;ejb 快捷键
 (global-set-key (kbd "C-<left>") 'windmove-left)   ;左边窗口

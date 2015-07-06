@@ -1,7 +1,7 @@
 ;;----------------------------------------------------------------------------
 ;; Emacs Config File
-;; author Korben Zhang and Others
-;; Copy many others configs.
+;; Author: Korben Zhang and Others
+;; Copy from many others configs.
 ;;----------------------------------------------------------------------------
 
 ;;(setq emacs-load-start-time (current-time))
@@ -123,8 +123,8 @@
 (load "~/.emacs.d/go.el")
 
 ;; Allow access from emacsclient
-;;(require 'server)
-;;(unless (server-running-p)(server-start))
+(require 'server)
+(unless (server-running-p)(server-start))
 
 (idle-require-mode 1) ;; starts loading
 

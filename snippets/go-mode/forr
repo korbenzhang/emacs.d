@@ -1,0 +1,5 @@
+# for range
+for $1 :=range $2 {
+
+	$0
+}

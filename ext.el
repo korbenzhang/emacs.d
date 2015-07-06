@@ -1,5 +1,3 @@
-
-
 ;; Copy
 
 (defun copy-line (&optional arg)
