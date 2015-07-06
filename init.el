@@ -14,7 +14,7 @@
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
-(require 'init-modeline)
+;;(require 'init-modeline)
 (require 'cl-lib)
 (require 'init-compat)
 (require 'init-utils)
@@ -26,7 +26,7 @@
 (require 'init-frame-hooks)
 
 ;; any file use flyspell should be initialized after init-spelling.el
-(require 'init-spelling)
+;;(require 'init-spelling)
 (require 'init-xterm)
 (require 'init-gui-frames)
 (require 'init-ido)
@@ -37,15 +37,15 @@
 (require 'init-smex)
 (require 'init-helm)
 (require 'init-hippie-expand)
-(require 'init-windows)
-(require 'init-sessions)
+;;(require 'init-windows)
+;;(require 'init-sessions)
 ;;(require 'init-git)
-(require 'init-crontab)
+;;(require 'init-crontab)
 (require 'init-markdown)
 ;;(require 'init-erlang)
 (require 'init-javascript)
 (require 'init-org)
-(require 'init-org-mime)
+;;(require 'init-org-mime)
 (require 'init-css)
 ;;(require 'init-python-mode)
 ;;(require 'init-haskell)
@@ -54,22 +54,22 @@
 (require 'init-elisp)
 (require 'init-yasnippet)
 ;; Use bookmark instead
-(require 'init-zencoding-mode)
+;;(require 'init-zencoding-mode)
 ;;(require 'init-cc-mode)
 ;;(require 'init-gud)
 ;;(require 'init-linum-mode)
 ;; (require 'init-gist)
 ;;(require 'init-moz)
-(require 'init-gtags)
+;;(require 'init-gtags)
 
 ;; use evil mode (vi key binding)
 (require 'init-evil)
 
 (require 'init-sh)
-(require 'init-ctags)
+;;(require 'init-ctags)
 (require 'init-ace-jump-mode)
-(require 'init-bbdb)
-(require 'init-gnus)
+;;(require 'init-bbdb)
+;;(require 'init-gnus)
 ;;(require 'init-lua-mode)
 ;;(require 'init-workgroups2)
 (require 'init-term-mode)
@@ -94,32 +94,33 @@
 
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
-(require 'window-numbering)
-(window-numbering-mode 1)
+;;(require 'window-numbering)
+;;(window-numbering-mode 1)
 
 (require 'quickrun)
 
-(require 'browse-kill-ring)
-(global-set-key [(control c) (k)] 'browse-kill-ring)
-(browse-kill-ring-default-keybindings)
+;;(require 'browse-kill-ring)
+;;(global-set-key [(control c) (k)] 'browse-kill-ring)
+;;(browse-kill-ring-default-keybindings)
 
-(require 'swbuff)
+;;(require 'swbuff)
 
-(setq swbuff-exclude-buffer-regexps
-     '("^ " "\\*.*\\*"))
+;;(setq swbuff-exclude-buffer-regexps
+;;     '("^ " "\\*.*\\*"))
 
-(setq swbuff-status-window-layout 'scroll)
-(setq swbuff-clear-delay 1)
-(setq swbuff-separator "|")
-(setq swbuff-window-min-text-height 1)
+;;(setq swbuff-status-window-layout 'scroll)
+;;(setq swbuff-clear-delay 1)
+;;(setq swbuff-separator "|")
+;;(setq swbuff-window-min-text-height 1)
 
 ;(global-set-key (kbd "") 'swbuff-switch-to-previous-buffer)
 ;(global-set-key (kbd "") 'swbuff-switch-to-next-buffer)
 
-(require 'move-text)
+;;(require 'move-text)
 
 ;; Go Lang
 (require 'go-mode-autoloads)
+
 (load "~/.emacs.d/go.el")
 
 ;; Allow access from emacsclient

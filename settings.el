@@ -88,9 +88,9 @@
 ;;(global-hl-line-mode t)
 
 ;;设置背景颜色
-(set-background-color "black")
+;;(set-background-color "black")
 ;;设置字体颜色
-(set-foreground-color "white")
+;;(set-foreground-color "white")
 
 ;;打开语法高亮
 (global-font-lock-mode t)
@@ -117,7 +117,6 @@
 (tool-bar-mode -1)
 (icomplete-mode 1)
 (scroll-bar-mode -1)
-
 
 ;;(setq make-backup-files nil)
 ;; 设定不产生备份文件
@@ -157,11 +156,11 @@
 
 ;; Keys
 ;;----------------------------------------------------------------------------
-(global-set-key [f7] 'compile)      ;;编译
-(global-set-key [C-f7] 'gdb)        ;;调试
-(setq-default compile-command "make")
-(global-set-key [C-f8] 'previous-error)    ;;上一个错误
-(global-set-key [f8] 'next-error)          ;;下一个错误
+;;(global-set-key [f7] 'compile)      ;;编译
+;;(global-set-key [C-f7] 'gdb)        ;;调试
+;;(setq-default compile-command "make")
+;;(global-set-key [C-f8] 'previous-error)    ;;上一个错误
+;;(global-set-key [f8] 'next-error)          ;;下一个错误
 
 (global-set-key [f4] 'other-window)
 
@@ -175,7 +174,6 @@
 
 (global-set-key (kbd "C-x c") 'copy-lines)        ;;复制一行或者多行
 (global-set-key (kbd "C-x d") 'zl-delete-line)    ;;删除一行
-
 
 ;;(global-set-key [C-f9] 'dired)
 ;;设置[C-f9]为调用dired命令
