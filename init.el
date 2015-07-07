@@ -78,7 +78,9 @@
 ;;(require 'init-html)
 ;;(require 'init-haml)
 ;;(require 'init-sql)
+(require 'direx)
 (require 'quickrun)
+
 ;;(require 'move-text)
 
 ;; Go Lang
