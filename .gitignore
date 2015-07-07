@@ -5,7 +5,9 @@
 .cask
 
 # Emacs generate
-elpa
+#elpa
+
+var
 auto-save-list
 \#*\#
 *~
