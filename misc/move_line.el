@@ -1,3 +1,6 @@
+;; Move line
+
+
 (defun move-line-up ()
   "Move up the current line."
   (interactive)
@@ -12,7 +15,6 @@
   (transpose-lines 1)
   (forward-line -1)
   (indent-according-to-mode))
-
 
 
 (global-set-key [(control shift up)]  'move-line-up)

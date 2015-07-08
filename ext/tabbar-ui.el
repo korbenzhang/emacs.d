@@ -1,3 +1,4 @@
+;; tabbar
 
 (set-face-attribute 'tabbar-default-face nil
                     :family "DejaVu Sans Mono"
