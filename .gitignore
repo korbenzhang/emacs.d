@@ -6,6 +6,7 @@
 
 # Emacs generate
 elpa
+site-lisp
 
 var
 auto-save-list
