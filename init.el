@@ -8,12 +8,7 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 
-;; Load settings
-(load "~/.emacs.d/ext/settings.el")
-
-;;----------------------------------------------------------------------------
-;; Load configs for specific features and modes
-;;----------------------------------------------------------------------------
+(require 'init-settings) ;; ~/.emacs.d/lisp/init-settings.el
 (require 'init-modeline)
 (require 'cl-lib)
 (require 'init-compat)
@@ -64,9 +59,9 @@
 ;;(require 'init-bbdb) ;; mail
 ;;(require 'init-gnus) ;; subscript
 ;;(require 'init-lua-mode)
-(require 'init-workgroups2)
-(require 'init-term-mode)
-(require 'init-web-mode)
+;;(require 'init-workgroups2)
+;;(require 'init-term-mode)
+;;(require 'init-web-mode)
 ;;(require 'init-slime)
 (require 'init-clipboard)
 (require 'init-company)
@@ -80,29 +75,13 @@
 ;;(require 'init-sql)
 (require 'direx)
 (require 'quickrun)
-
+(require 'init-golang)
 ;;(require 'move-text)
-
-;; Go Lang
-(load "~/.emacs.d/ext/go.el")
-
-;; Allow access from emacsclient
-;; In windows should chown server to current user.
-(require 'server)
-(unless (server-running-p)(server-start))
-
-(idle-require-mode 1) ;; starts loading
-
+(require 'init-server)        ;; ~/.emacs.d/lisp/init-server.el
+(idle-require-mode 1)         ;; starts loading
 ;; Locales (setting them earlier in this file doesn't work in X)
-(require 'init-locales)
-
-;;(load "~/.emacs.d/ext/ext.el")
-;;(load "~/.emacs.d/ext/tabbar.el")
-(load-file "~/.emacs.d/ext/key.el")
-;;(load-file "~/.emacs.d/ext/keyring.el")
-;;(load-file "~/.emacs.d/ext/window_numbering.el")
-(load "~/.emacs.d/ext/theme.el")
-
-;; personal setup, outside of git.
-(if (file-exists-p "~/.custom.el") (load-file "~/.custom.el"))
+(require 'init-locales)       ;; ~/.emacs.d/lisp/init-locales.el
+(require 'init-ext)           ;; ~/.emacs.d/lisp/init-ext.el
+(require 'init-custom-theme)  ;; ~/.emacs.d/lisp/init-custom-theme
+(require 'init-custom)        ;; ~/.emacs.d/lisp/init-custom.el
 
