@@ -2,13 +2,13 @@
 
 (require 'go-mode)
 (require 'go-errcheck)
-(require 'go-eldoc) ;; Don't need to require, if you install by package.el
+;;(require 'go-eldoc) ;; Don't need to require, if you install by package.el
 
-(add-hook 'go-mode-hook 'go-eldoc-setup)
+;;(add-hook 'go-mode-hook 'go-eldoc-setup)
 
-(set-face-attribute 'eldoc-highlight-function-argument nil
-                    :underline t :foreground "green"
-                    :weight 'bold)
+;;(set-face-attribute 'eldoc-highlight-function-argument nil
+;;                    :underline t :foreground "green"
+;;                    :weight 'bold)
 
 (add-hook 'go-mode-hook '(lambda ()
 			   (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)))
