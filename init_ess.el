@@ -87,3 +87,5 @@
 ;;(require 'init-custom-theme)  ;; ~/.emacs.d/lisp/init-custom-theme.el
 ;;(require 'init-custom)        ;; ~/.emacs.d/lisp/init-custom.el
 
+
+(require 'init-font-monaco)
