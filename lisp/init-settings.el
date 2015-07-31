@@ -2,9 +2,7 @@
 ;; Emacs Settings
 ;;----------------------------------------------------------------------------
 
-(setq default-directory "~/")
-
-(load "~/.emacs.d/ext/package.el")
+;;(setq default-directory "~/")
 
 ;;----------------------------------------------------------------------------
 ;; Which functionality to enable (use t or nil for true and false)
